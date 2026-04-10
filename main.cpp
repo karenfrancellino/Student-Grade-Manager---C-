@@ -1,39 +1,52 @@
 #include <iostream>
 #include <string>
-using namespace std;
 
-int main(){
-    struct Alumno{
-        string nombre;
-        string apellido;
-        string dni;
-        double calificacion;
-    };
+struct Alumno {
+    std::string nombre;
+    std::string apellido;
+    std::string dni;
+    double calificacion;
+};
+
+int main() {
     const int numAlumnos = 4;
-    Alumno listaAlumnos[4];
-    string DNIsolicitado;
+
+    Alumno listaAlumnos[numAlumnos] = {
+        {"Juan", "Lopes", "44567234P", 0},
+        {"Laura", "Peres", "23456981F", 0},
+        {"Carlos", "Lopes", "44567342G", 0},
+        {"Maria", "Gutierre", "44567342P", 0}
+    };
+
+    std::string DNIsolicitado;
     bool alumnoEncontrado = false;
 
-    listaAlumnos[0] = {"Juan", "Lopes", "44567234P"};
-    listaAlumnos[1] = {"Laura", "Peres", "23456981F"};
-    listaAlumnos[2] = {"Carlos", "Lopes", "44567342G"};
-    listaAlumnos[3] = {"Maria", "Gutierre", "44567342P"};
-    cout << "Introduzca el DNI del alumno: ";
-    cin >> DNIsolicitado;
-    
-    for (int i = 0; i < numAlumnos; ++i){
-        if (listaAlumnos[i].dni == DNIsolicitado){
-            cout << "Introduce la calificacion para " << listaAlumnos[i].nombre << " " <<listaAlumnos[i].apellido << ": ";
-            cin >> listaAlumnos[i].calificacion;
+    std::cout << "Introduzca el DNI del alumno: ";
+    std::cin >> DNIsolicitado;
 
-            cout << "El alumno " <<listaAlumnos[i].nombre << " " <<listaAlumnos[i].apellido<< " ha obtenido un " << listaAlumnos[i].calificacion << endl; 
-            
+    for (int i = 0; i < numAlumnos; i++) {
+        if (listaAlumnos[i].dni == DNIsolicitado) {
+
+            std::cout << "Introduce la calificación para "
+                      << listaAlumnos[i].nombre << " "
+                      << listaAlumnos[i].apellido << ": ";
+
+            std::cin >> listaAlumnos[i].calificacion;
+
+            std::cout << "El alumno "
+                      << listaAlumnos[i].nombre << " "
+                      << listaAlumnos[i].apellido
+                      << " ha obtenido un "
+                      << listaAlumnos[i].calificacion << "\n";
+
             alumnoEncontrado = true;
             break;
-        } 
+        }
     }
+
     if (!alumnoEncontrado) {
-        cout << "No se encotro ningun alumno con el DNI ingresado. " <<endl;
+        std::cout << "No se encontró ningún alumno con el DNI ingresado.\n";
     }
+
     return 0;
 }
